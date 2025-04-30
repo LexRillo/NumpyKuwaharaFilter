@@ -253,6 +253,27 @@ def create_sector_kernels(window_size : int, sections : int = 8):
     
     return kernels
     
+# def create_anisotropic_sector_kernels(window_size:int, normal_vector):
+    # filters = []
+    
+    # for i in range(8):
+        # angle = i*np.pi/4
+        # x,y = np.meshgrid(np.linspace(-1,1, window_size), np.linspace(-1,1, window_size))
+        # r = np.sqrt(x**2 + y**2)
+        # theta = np.arctan2(y,x)
+        # theta = np.mod(theta -angle, 2*np.pi)
+        # mask = (theta <np.pi/8) | (theta > 15*np.pi/8)
+        # mask = mask& (r<=1)
+        
+        # sigma_x = 1
+        # sigma_y = 1/np.dot(normal_vector, [np.cos(angle), np.sin(angle)])
+        # # print(sigma_x, sigma_y)
+        # # section_filter = gaussian(mask.astype(float), (sigma_x, sigma_y))
+        # io.imshow(mask)
+        # io.show()
+    # filters.append(section_filter)
+    # return filters
+        
 
 ### Auxiliary functions        
 def is_point_in_circle(x, y, r):
@@ -275,6 +296,7 @@ if __name__ == '__main__':
     g_kawa = generalized_Kuwahara_filter(img, 9)
 
     # Apply Anisotropic Kuwahara filter
+    # create_anisotropic_sector_kernels(9, np.array([0.9848, 0.1736]))
 
     # Show images
     fig, axes = plt.subplots(3, 2, figsize=(7, 6))
